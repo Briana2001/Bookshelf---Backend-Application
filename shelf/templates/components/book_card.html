@@ -1,0 +1,48 @@
+<a href="{% url 'shelf:book_detail' book.id %}" class="group bg-white rounded-xl border border-stone-200/70 p-4 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-200 flex flex-col">
+
+  <!-- Top row: cover placeholder + actions -->
+  <div class="flex items-start justify-between">
+    <div class="w-12 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-md shadow-inner flex items-center justify-center shrink-0">
+      <svg class="w-6 h-6 text-amber-700/70" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+      </svg>
+    </div>
+
+    <!-- Status badge -->
+    <span class="inline-flex items-center gap-1 px-2 py-1 text-[11px] font-medium rounded-full
+      {% if book.status == 'want' %} bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200
+      {% elif book.status == 'reading' %} bg-rose-50 text-rose-700 ring-1 ring-rose-200
+      {% else %} bg-amber-50 text-amber-700 ring-1 ring-amber-200 {% endif %}">
+      <span class="w-1.5 h-1.5 rounded-full
+        {% if book.status == 'want' %} bg-emerald-500
+        {% elif book.status == 'reading' %} bg-rose-500
+        {% else %} bg-amber-500 {% endif %}"></span>
+      {{ book.status }}
+    </span>
+  </div>
+
+  <!-- Title + description -->
+  <div class="mt-3 flex-1">
+    <h2 class="font-semibold text-stone-800 leading-snug line-clamp-1 group-hover:text-amber-800 transition-colors">
+      {{ book.title }}
+    </h2>
+    <p class="text-sm text-stone-500 mt-1 line-clamp-2">{{ book.description }}</p>
+  </div>
+
+  <!-- Footer: author + date -->
+  <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+    <span class="inline-flex items-center gap-1.5 min-w-0">
+      <svg class="w-3.5 h-3.5 text-stone-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+      </svg>
+      <span class="truncate">{{ book.author }}</span>
+    </span>
+    <span class="inline-flex items-center gap-1.5 shrink-0">
+      <svg class="w-3.5 h-3.5 text-stone-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+      </svg>
+      {{ book.published_at|date:"M Y" }}
+    </span>
+  </div>
+
+</article>

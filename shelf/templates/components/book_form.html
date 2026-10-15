@@ -1,0 +1,165 @@
+{% comment %}
+Reusable BookForm renderer.
+Usage: {% include "components/book_form.html" with form=form %}
+Fields rendered explicitly (no looping) based on BookForm.Meta.fields.
+{% endcomment %}
+
+<div class="space-y-6">
+
+  {# ---------- Title ---------- #}
+  <div class="flex flex-col gap-1.5">
+    <label for="{{ form.title.id_for_label }}"
+           class="text-sm font-medium text-stone-800">
+      {{ form.title.label }}
+      {% if form.title.field.required %}
+        <span class="text-rose-500 ml-0.5" aria-hidden="true">*</span>
+      {% endif %}
+    </label>
+
+    {% if form.title.errors %}
+      <div class="relative rounded-lg ring-1 ring-rose-400/60">{{ form.title }}</div>
+      <ul class="mt-1 space-y-1">
+        {% for error in form.title.errors %}
+          <li class="flex items-start gap-1.5 text-xs text-rose-600">
+            <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ error }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="relative">{{ form.title }}</div>
+    {% endif %}
+  </div>
+
+  {# ---------- Author ---------- #}
+  <div class="flex flex-col gap-1.5">
+    <label for="{{ form.author.id_for_label }}"
+           class="text-sm font-medium text-stone-800">
+      {{ form.author.label }}
+      {% if form.author.field.required %}
+        <span class="text-rose-500 ml-0.5" aria-hidden="true">*</span>
+      {% endif %}
+    </label>
+
+    {% if form.author.errors %}
+      <div class="relative rounded-lg ring-1 ring-rose-400/60">{{ form.author }}</div>
+      <ul class="mt-1 space-y-1">
+        {% for error in form.author.errors %}
+          <li class="flex items-start gap-1.5 text-xs text-rose-600">
+            <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ error }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="relative">{{ form.author }}</div>
+    {% endif %}
+  </div>
+
+  {# ---------- Description ---------- #}
+  <div class="flex flex-col gap-1.5">
+    <label for="{{ form.description.id_for_label }}"
+           class="text-sm font-medium text-stone-800">
+      {{ form.description.label }}
+      {% if form.description.field.required %}
+        <span class="text-rose-500 ml-0.5" aria-hidden="true">*</span>
+      {% endif %}
+    </label>
+
+    {% if form.description.errors %}
+      <div class="relative rounded-lg ring-1 ring-rose-400/60">{{ form.description }}</div>
+      <ul class="mt-1 space-y-1">
+        {% for error in form.description.errors %}
+          <li class="flex items-start gap-1.5 text-xs text-rose-600">
+            <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ error }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="relative">{{ form.description }}</div>
+    {% endif %}
+  </div>
+
+  {# ---------- Status + ISBN (side-by-side on md+) ---------- #}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    {# Status #}
+    <div class="flex flex-col gap-1.5">
+      <label for="{{ form.status.id_for_label }}"
+             class="text-sm font-medium text-stone-800">
+        {{ form.status.label }}
+        {% if form.status.field.required %}
+          <span class="text-rose-500 ml-0.5" aria-hidden="true">*</span>
+        {% endif %}
+      </label>
+
+      {% if form.status.errors %}
+        <div class="relative rounded-lg ring-1 ring-rose-400/60">{{ form.status }}</div>
+        <ul class="mt-1 space-y-1">
+          {% for error in form.status.errors %}
+            <li class="flex items-start gap-1.5 text-xs text-rose-600">
+              <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{{ error }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="relative">{{ form.status }}</div>
+      {% endif %}
+    </div>
+
+    {# ISBN #}
+    <div class="flex flex-col gap-1.5">
+      <label for="{{ form.isbn.id_for_label }}"
+             class="text-sm font-medium text-stone-800">
+        {{ form.isbn.label }}
+        {% if form.isbn.field.required %}
+          <span class="text-rose-500 ml-0.5" aria-hidden="true">*</span>
+        {% endif %}
+      </label>
+
+      {% if form.isbn.errors %}
+        <div class="relative rounded-lg ring-1 ring-rose-400/60">{{ form.isbn }}</div>
+        <ul class="mt-1 space-y-1">
+          {% for error in form.isbn.errors %}
+            <li class="flex items-start gap-1.5 text-xs text-rose-600">
+              <svg class="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{{ error }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="relative">{{ form.isbn }}</div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  {# ---------- Non-field errors ---------- #}
+  {% if form.non_field_errors %}
+    <div class="rounded-lg border border-rose-200 bg-rose-50 p-3.5">
+      <div class="flex items-start gap-2">
+        <svg class="w-5 h-5 text-rose-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <ul class="text-sm text-rose-700 space-y-1">
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+</div>

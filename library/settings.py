@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shelf'
+    'shelf',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,7 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+LOGIN_URL = 'account:login'
+_REDIRECT_URL = 'shelf:home'
+LOGOUT_REDIRECT_URL = 'shelf:home'

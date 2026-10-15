@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto flex flex-col gap-6">
+
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-stone-800">Your Profile</h1>
+    <p class="text-stone-500 mt-2">How you appear on your shelf.</p>
+  </div>
+
+  <div class="bg-white border border-stone-200 rounded-2xl shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-stone-100 bg-stone-50/50">
+      <h2 class="text-sm font-semibold text-stone-700 uppercase tracking-wide">Account details</h2>
+    </div>
+
+    <dl class="divide-y divide-stone-100">
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+        <dt class="text-sm font-medium text-stone-500 sm:w-40 shrink-0">Username</dt>
+        <dd class="text-sm text-stone-800">{{ profile_user.username }}</dd>
+      </div>
+
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+        <dt class="text-sm font-medium text-stone-500 sm:w-40 shrink-0">Email</dt>
+        <dd class="text-sm text-stone-800">{{ profile_user.email|default:"—" }}</dd>
+      </div>
+
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+        <dt class="text-sm font-medium text-stone-500 sm:w-40 shrink-0">First name</dt>
+        <dd class="text-sm text-stone-800">{{ profile_user.first_name|default:"—" }}</dd>
+      </div>
+
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+        <dt class="text-sm font-medium text-stone-500 sm:w-40 shrink-0">Last name</dt>
+        <dd class="text-sm text-stone-800">{{ profile_user.last_name|default:"—" }}</dd>
+      </div>
+
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+        <dt class="text-sm font-medium text-stone-500 sm:w-40 shrink-0">Joined</dt>
+        <dd class="text-sm text-stone-800">{{ profile_user.date_joined|date:"F j, Y" }}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div>
+    <a href="{% url 'account:profile_edit' %}"
+       class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-700 hover:bg-amber-800 text-white text-sm font-semibold rounded-lg shadow-sm hover:shadow transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zM19.5 7.125L16.875 4.5" />
+      </svg>
+      Edit profile
+    </a>
+  </div>
+
+</div>
+{% endblock %}
